@@ -11,6 +11,12 @@ import { useHistory } from 'react-router-dom'
 export default function Supported() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [newSupported, setNewSupported] = useState('');
+
+    const storeFeedback = () => {
+        dispatch({type: 'ADD_FEEDBACK', payload: newSupported})
+        // history.push('/checkoutpage')
+    }
 
     return (
         <Box
@@ -23,8 +29,10 @@ export default function Supported() {
         >
             <TextField
                 required
-                id="feelingInput"
-                label="Feeling?"
+                onChange={event => {setNewSupported(event.target.value)}}
+                value={newSupported}
+                id="supportedInput"
+                label="Supported?"
                 variant="standard"
             />
             <Button

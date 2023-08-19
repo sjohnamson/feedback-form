@@ -11,6 +11,12 @@ import { useHistory } from 'react-router-dom'
 export default function Comments() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [newComment, setNewComment] = useState('');
+
+    const storeFeedback = () => {
+        dispatch({type: 'ADD_FEEDBACK', payload: newComment})
+        // history.push('/checkoutpage')
+    }
 
     return (
         <Box
@@ -23,11 +29,14 @@ export default function Comments() {
         >
             <TextField
                 required
-                id="feelingInput"
-                label="Feeling?"
+                onChange={event => {setNewComment(event.target.value)}}
+                value={newComment}
+                id="commentInput"
+                label="Comment?"
                 variant="standard"
             />
             <Button
+                onClick={storeFeedback}
                 variant="outlined"
                 endIcon={<NavigateNextIcon
                 />}

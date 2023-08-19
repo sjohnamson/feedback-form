@@ -11,6 +11,12 @@ import { useHistory } from 'react-router-dom'
 export default function FeelingToday() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [newFeelings, setNewFeelings] = useState('');
+
+    const storeFeedback = () => {
+        dispatch({type: 'ADD_FEEDBACK', payload: newFeelings})
+        // history.push('/checkoutpage')
+    }
 
     return (
         <Box
@@ -23,6 +29,8 @@ export default function FeelingToday() {
         >
             <TextField
                 required
+                onChange={event => {setNewFeelings(event.target.value)}}
+                value={newFeelings}
                 id="feelingInput"
                 label="Feeling?"
                 variant="standard"

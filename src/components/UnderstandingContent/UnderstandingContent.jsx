@@ -11,6 +11,12 @@ import { useHistory } from 'react-router-dom'
 export default function UnderstandingContent() {
     const history = useHistory();
     const dispatch = useDispatch();
+    const [newUnderstanding, setNewUnderstanding] = useState('');
+
+    const storeFeedback = () => {
+        dispatch({type: 'ADD_FEEDBACK', payload: newUnderstanding})
+        // history.push('/checkoutpage')
+    }
     
     return (
         <Box
@@ -23,8 +29,10 @@ export default function UnderstandingContent() {
         >
             <TextField
                 required
-                id="feelingInput"
-                label="Feeling?"
+                onChange={event => {setNewUnderstanding(event.target.value)}}
+                value={newUnderstanding}
+                id="understandingInput"
+                label="Understanding?"
                 variant="standard"
             />
             <Button
