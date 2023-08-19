@@ -8,10 +8,10 @@ import Button from '@mui/material/Button';
 
 import { useHistory } from 'react-router-dom'
 
-export default function Supported() {
+export default function UnderstandingContent() {
     const history = useHistory();
     const dispatch = useDispatch();
-
+    
     return (
         <Box
             component="form"
