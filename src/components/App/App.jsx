@@ -9,6 +9,7 @@ import Supported from '../Supported/Supported';
 import Comments from '../Comments/Comments';
 import FeedbackReview from '../FeedbackReview/FeedbackReview';
 import ThankYou from '../ThankYou/ThankYou';
+import AdminPage from '../AdminPage/AdminPage';
 
 function App() {
 
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path='/thankyou' exact>
           <ThankYou />
+        </Route>
+        <Route path='/admin' exact>
+          <AdminPage />
         </Route>
       </Router>
     </div>
