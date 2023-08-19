@@ -12,10 +12,15 @@ export default function Supported() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [newSupported, setNewSupported] = useState('');
+    const [newError, setNewError] = useState(false);
 
     const storeFeedback = () => {
+        if (newSupported) {
         dispatch({type: 'ADD_FEEDBACK', payload: {key: 'support', value: newSupported }})
         history.push('/comments')
+    } else {
+        setNewError(true);
+    }
     }
 
     return (
@@ -34,6 +39,8 @@ export default function Supported() {
                 id="supportedInput"
                 label="Supported?"
                 variant="standard"
+                helperText={newError && "field is required, please enter a value from 1-5"}
+                error={newError}
             />
             <Button
             onClick={storeFeedback}

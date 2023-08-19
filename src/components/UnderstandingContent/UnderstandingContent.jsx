@@ -12,10 +12,15 @@ export default function UnderstandingContent() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [newUnderstanding, setNewUnderstanding] = useState('');
+    const [newError, setNewError] = useState(false);
 
     const storeFeedback = () => {
+        if (newUnderstanding) {
         dispatch({ type: 'ADD_FEEDBACK', payload: {key: 'understanding', value: newUnderstanding }})
         history.push('/support')
+    } else {
+        setNewError(true);
+    }
     }
 
     return (
@@ -34,6 +39,8 @@ export default function UnderstandingContent() {
                 id="understandingInput"
                 label="Understanding?"
                 variant="standard"
+                helperText={newError && "field is required, please enter a value from 1-5"}
+                error={newError}
             />
             <Button
                 onClick={storeFeedback}

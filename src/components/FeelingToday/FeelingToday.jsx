@@ -14,8 +14,8 @@ export default function FeelingToday() {
     const [newError, setNewError] = useState(false)
 
     const storeFeedback = () => {
-        console.log('in storeFeedback, ', newFeelings)
-        if (newFeelings) {
+        console.log('in storeFeedback, ', Number(newFeelings))
+        if (Number(newFeelings) >= 1 && Number(newFeelings) <= 5 ) {
             dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'feeling', value: newFeelings } })
             history.push('/understanding')
         } else {

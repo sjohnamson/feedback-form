@@ -14,9 +14,11 @@ export default function Comments() {
     const [newComment, setNewComment] = useState('');
 
     const storeFeedback = () => {
-        dispatch({type: 'ADD_FEEDBACK', payload: {key: 'comments', value: newComment }})
+
+        dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'comments', value: newComment } })
         history.push('/review')
     }
+
 
     return (
         <Box
@@ -28,12 +30,12 @@ export default function Comments() {
             autoComplete="off"
         >
             <TextField
-                required
-                onChange={event => {setNewComment(event.target.value)}}
+                onChange={event => { setNewComment(event.target.value) }}
                 value={newComment}
                 id="commentInput"
                 label="Comment?"
                 variant="standard"
+                multiline
             />
             <Button
                 onClick={storeFeedback}
