@@ -8,7 +8,10 @@ import logger from 'redux-logger';
 
 const feedback = (state = {}, action) => {
     if (action.type === 'ADD_FEEDBACK') {
-        // return {...state, action.payload,}
+        return {...state, [action.payload.key]: action.payload.value}
+    }
+    if (action.type === 'CLEAR_FEEDBACK') {
+        return {}
     }
     return state
 }

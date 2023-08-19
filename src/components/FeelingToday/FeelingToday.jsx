@@ -1,5 +1,4 @@
 import { useDispatch, useSelector, } from 'react-redux';
-import axios from 'axios';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,10 +11,16 @@ export default function FeelingToday() {
     const history = useHistory();
     const dispatch = useDispatch();
     const [newFeelings, setNewFeelings] = useState('');
+    const [newError, setNewError] = useState(false)
 
     const storeFeedback = () => {
-        dispatch({type: 'ADD_FEEDBACK', payload: newFeelings})
-        // history.push('/checkoutpage')
+        console.log('in storeFeedback, ', newFeelings)
+        if (newFeelings) {
+            dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'feeling', value: newFeelings } })
+            history.push('/understanding')
+        } else {
+            setNewError(true);
+        }
     }
 
     return (
@@ -29,13 +34,16 @@ export default function FeelingToday() {
         >
             <TextField
                 required
-                onChange={event => {setNewFeelings(event.target.value)}}
+                onChange={event => { setNewFeelings(event.target.value) }}
                 value={newFeelings}
-                id="feelingInput"
-                label="Feeling?"
                 variant="standard"
+                id="feelingInput"
+                label="How are you feeling today? "
+                helperText={newError && "field is required, please enter a value from 1-5"}
+                error={newError}
             />
             <Button
+                onClick={storeFeedback}
                 variant="outlined"
                 endIcon={<NavigateNextIcon
                 />}

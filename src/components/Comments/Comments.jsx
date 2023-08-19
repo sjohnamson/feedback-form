@@ -14,8 +14,8 @@ export default function Comments() {
     const [newComment, setNewComment] = useState('');
 
     const storeFeedback = () => {
-        dispatch({type: 'ADD_FEEDBACK', payload: newComment})
-        // history.push('/checkoutpage')
+        dispatch({type: 'ADD_FEEDBACK', payload: {key: 'comments', value: newComment }})
+        history.push('/review')
     }
 
     return (

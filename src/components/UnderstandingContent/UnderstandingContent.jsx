@@ -14,10 +14,10 @@ export default function UnderstandingContent() {
     const [newUnderstanding, setNewUnderstanding] = useState('');
 
     const storeFeedback = () => {
-        dispatch({type: 'ADD_FEEDBACK', payload: newUnderstanding})
-        // history.push('/checkoutpage')
+        dispatch({ type: 'ADD_FEEDBACK', payload: {key: 'understanding', value: newUnderstanding }})
+        history.push('/support')
     }
-    
+
     return (
         <Box
             component="form"
@@ -29,13 +29,14 @@ export default function UnderstandingContent() {
         >
             <TextField
                 required
-                onChange={event => {setNewUnderstanding(event.target.value)}}
+                onChange={event => { setNewUnderstanding(event.target.value) }}
                 value={newUnderstanding}
                 id="understandingInput"
                 label="Understanding?"
                 variant="standard"
             />
             <Button
+                onClick={storeFeedback}
                 variant="outlined"
                 endIcon={<NavigateNextIcon
                 />}

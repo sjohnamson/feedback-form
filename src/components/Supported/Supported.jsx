@@ -14,8 +14,8 @@ export default function Supported() {
     const [newSupported, setNewSupported] = useState('');
 
     const storeFeedback = () => {
-        dispatch({type: 'ADD_FEEDBACK', payload: newSupported})
-        // history.push('/checkoutpage')
+        dispatch({type: 'ADD_FEEDBACK', payload: {key: 'support', value: newSupported }})
+        history.push('/comments')
     }
 
     return (
@@ -36,6 +36,7 @@ export default function Supported() {
                 variant="standard"
             />
             <Button
+            onClick={storeFeedback}
                 variant="outlined"
                 endIcon={<NavigateNextIcon
                 />}
