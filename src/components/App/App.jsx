@@ -10,12 +10,17 @@ import Comments from '../Comments/Comments';
 import FeedbackReview from '../FeedbackReview/FeedbackReview';
 import ThankYou from '../ThankYou/ThankYou';
 import AdminPage from '../AdminPage/AdminPage';
+import { Stepper } from '@mui/material';
+import HorizontalStepper from '../Stepper/Stepper';
 
 function App() {
 
   return (
     <div className='App'>
       <Header />
+
+      <HorizontalStepper />
+
       <Router>
         <Route path='/' exact>
           <FeelingToday />
