@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom'
 
@@ -43,7 +44,7 @@ export default function FeedbackReview() {
                 <Button
                     variant="outlined"
                     color='secondary'
-                    endIcon={<AddIcon />}
+                    endIcon={<EditIcon />}
                 >
                     Edit Responses
                 </Button>

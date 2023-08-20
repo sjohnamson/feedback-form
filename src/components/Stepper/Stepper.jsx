@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { useHistory, withRouter } from 'react-router-dom'
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -10,13 +11,16 @@ import FeelingToday from '../FeelingToday/FeelingToday';
 import UnderstandingContent from '../UnderstandingContent/UnderstandingContent';
 import Supported from '../Supported/Supported';
 import Comments from '../Comments/Comments';
+import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
 
 
-
-export default function HorizontalStepper() {
+function HorizontalStepper() {
     const steps = ['How do you feel?', 'Comprehension', 'Do you feel supported?', 'Comments'];
     const [activeStep, setActiveStep] = useState(0);
     const [completed, setCompleted] = useState({});
+    const history = useHistory();
+
 
     const totalSteps = () => {
         return steps.length;
@@ -64,6 +68,10 @@ export default function HorizontalStepper() {
         setCompleted({});
     };
 
+    const handleReview = () => {
+        history.push('/review');
+    }
+
     const forms = [
         <FeelingToday handleComplete={handleComplete} />,
         <UnderstandingContent handleComplete={handleComplete} />,
@@ -93,9 +101,19 @@ export default function HorizontalStepper() {
                         </Typography>
                         <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleBack}>Edit your feedback</Button>
+                            <Button
+                                onClick={handleBack}
+                                variant='outlined'
+                                startIcon={<EditIcon />}
+                            >
+                                Edit your feedback
+                            </Button>
                             {completedSteps() === totalSteps() &&
-                                <Button onClick={handleComplete}>
+                                <Button
+                                    onClick={handleReview}
+                                    variant='outlined'
+                                    startIcon={<AddIcon />}
+                                >
                                     Submit Feedback
                                 </Button>
                             }
@@ -119,8 +137,10 @@ export default function HorizontalStepper() {
 
                         </Box>
                     </>
-                )} 
+                )}
             </div>
         </Box>
     );
 }
+
+export default withRouter(HorizontalStepper)

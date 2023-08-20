@@ -9,10 +9,11 @@ import { useHistory } from 'react-router-dom'
 import { Typography } from '@mui/material';
 
 export default function FeelingToday({ handleComplete }) {
+    
     const history = useHistory();
     const dispatch = useDispatch();
     const [newFeelings, setNewFeelings] = useState('');
-    const [newError, setNewError] = useState(false)
+    const [newError, setNewError] = useState(false);
 
     const storeFeedback = () => {
         console.log('in storeFeedback, ', Number(newFeelings))

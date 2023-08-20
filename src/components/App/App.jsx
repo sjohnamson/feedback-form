@@ -19,8 +19,6 @@ function App() {
     <div className='App'>
       <Header />
 
-      <HorizontalStepper />
-
       <Router>
         {/* <Route path='/' exact>
           <FeelingToday />
@@ -33,13 +31,16 @@ function App() {
         </Route>
         <Route path='/comments' exact>
           <Comments />
+        </Route>*/}
+        <Route path='/' exact>
+          <HorizontalStepper />
         </Route>
         <Route path='/review' exact>
           <FeedbackReview />
         </Route>
         <Route path='/thankyou' exact>
           <ThankYou />
-        </Route> */}
+        </Route>
         <Route path='/admin' exact>
           <AdminPage />
         </Route>

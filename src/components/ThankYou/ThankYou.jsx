@@ -12,7 +12,7 @@ export default function ThankYou() {
     return (
         <>
         <h1>Thank you for your feedback!</h1>
-        <Button >Complete another survey</Button>
+        <Button onClick={() => history.push('/')}>Complete another survey</Button>
         </>
     )
 }
