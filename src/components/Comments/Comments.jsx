@@ -1,50 +1,65 @@
 import { useDispatch, useSelector, } from 'react-redux';
-import axios from 'axios';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Button from '@mui/material/Button';
-
 import { useHistory } from 'react-router-dom'
+import { Typography } from '@mui/material';
 
-export default function Comments() {
+export default function Comments({ handleComplete }) {
     const history = useHistory();
     const dispatch = useDispatch();
     const [newComment, setNewComment] = useState('');
 
     const storeFeedback = () => {
-
+        console.log('in storeFeedback, ', newComment)
         dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'comments', value: newComment } })
-        history.push('/review')
+        // history.push('/understanding')
+        handleComplete();
     }
 
-
     return (
-        <Box
-            component="form"
+        <Paper
+            elevation={8}
             sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                height: 200,
+                width: '60%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: 4,
+                padding: 2
             }}
-            noValidate
-            autoComplete="off"
         >
-            <TextField
-                onChange={event => { setNewComment(event.target.value) }}
-                value={newComment}
-                id="commentInput"
-                label="Comment?"
-                variant="standard"
-                multiline
-            />
-            <Button
-                onClick={storeFeedback}
-                variant="outlined"
-                endIcon={<NavigateNextIcon
-                />}
+            <Box
+                component="form"
+                alignItems="center"
+                justifyContent="center"
+                noValidate
+                autoComplete="off"
             >
-                Next
-            </Button>
-        </Box>
+                <Typography variant='h5'>
+                    Do you have any comments you'd like to share?
+                </Typography>
+                <TextField
+                    multiline
+                    onChange={event => { setNewComment(event.target.value) }}
+                    value={newComment}
+                    variant="standard"
+                    id="commentInput"
+                    label="comment"
+                />
+                <Box marginTop={4}>
+                    <Button
+                        onClick={storeFeedback}
+                        variant="outlined"
+                        endIcon={<NavigateNextIcon />}
+                    >
+                        Submit
+                    </Button>
+                </Box>
+            </Box>
+        </Paper>
     )
 }

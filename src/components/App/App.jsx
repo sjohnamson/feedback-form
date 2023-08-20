@@ -22,7 +22,7 @@ function App() {
       <HorizontalStepper />
 
       <Router>
-        <Route path='/' exact>
+        {/* <Route path='/' exact>
           <FeelingToday />
         </Route>
         <Route path='/understanding' exact>
@@ -39,7 +39,7 @@ function App() {
         </Route>
         <Route path='/thankyou' exact>
           <ThankYou />
-        </Route>
+        </Route> */}
         <Route path='/admin' exact>
           <AdminPage />
         </Route>

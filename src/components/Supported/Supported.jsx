@@ -1,55 +1,73 @@
 import { useDispatch, useSelector, } from 'react-redux';
-import axios from 'axios';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Button from '@mui/material/Button';
-
 import { useHistory } from 'react-router-dom'
+import { Typography } from '@mui/material';
 
-export default function Supported() {
+export default function Supported({ handleComplete }) {
     const history = useHistory();
     const dispatch = useDispatch();
-    const [newSupported, setNewSupported] = useState('');
-    const [newError, setNewError] = useState(false);
+    const [newSupport, setNewSupport] = useState('');
+    const [newError, setNewError] = useState(false)
 
     const storeFeedback = () => {
-        if (newSupported) {
-        dispatch({type: 'ADD_FEEDBACK', payload: {key: 'support', value: newSupported }})
-        history.push('/comments')
-    } else {
-        setNewError(true);
-    }
+        console.log('in storeFeedback, ', Number(newSupport))
+        if (Number(newSupport) >= 1 && Number(newSupport) <= 5) {
+            dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'support', value: newSupport } })
+            // history.push('/understanding')
+            handleComplete();
+        } else {
+            setNewError(true);
+        }
     }
 
     return (
-        <Box
-            component="form"
+        <Paper
+            elevation={8}
             sx={{
-                '& > :not(style)': { m: 1, width: '25ch' },
+                height: 200,
+                width: '60%',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                marginTop: 4,
+                padding: 2
             }}
-            noValidate
-            autoComplete="off"
         >
-            <TextField
-                required
-                onChange={event => {setNewSupported(event.target.value)}}
-                value={newSupported}
-                id="supportedInput"
-                label="Supported?"
-                variant="standard"
-                helperText={newError && "field is required, please enter a value from 1-5"}
-                error={newError}
-            />
-            <Button
-            onClick={storeFeedback}
-                variant="outlined"
-                endIcon={<NavigateNextIcon
-                />}
+            <Box
+                component="form"
+                alignItems="center"
+                justifyContent="center"
+                noValidate
+                autoComplete="off"
             >
-                Next
-            </Button>
-        </Box>
+                <Typography variant='h5'>
+                    How well did you feel supported today?
+                </Typography>
+                <TextField
+                    required
+                    onChange={event => { setNewSupport(event.target.value) }}
+                    value={newSupport}
+                    variant="standard"
+                    id="supportInput"
+                    label="1-5"
+                    helperText={newError && "please enter a value from 1-5"}
+                    error={newError}
+                />
+                <Box marginTop={4}>
+                    <Button
+                        onClick={storeFeedback}
+                        variant="outlined"
+                        endIcon={<NavigateNextIcon
+                        />}
+                    >
+                        Submit
+                    </Button>
+                </Box>
+            </Box>
+        </Paper>
     )
 }
