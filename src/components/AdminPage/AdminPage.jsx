@@ -13,6 +13,7 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import FlagIcon from '@mui/icons-material/Flag';
 
 
 export default function AdminPage() {
@@ -41,14 +42,30 @@ export default function AdminPage() {
             .then((response) => {
                 console.log('Deleted: ', entry.id);
                 fetchEntries();
+                handleClose();
             })
             .catch((error) => {
                 console.log('Error in DELETE/ feedback', error);
             })
     }
 
+    // function to flag/unflag entries
+    const handleFlag = (entry) => {
+        console.log('flagged?', entry.flagged)
+        axios
+        .put(`/feedback/${entry.id}`, {flagged: !entry.flagged})
+        .then((response) => {
+            console.log('Flagged: ', entry.id);
+            fetchEntries();
+        })
+        .catch((error) => {
+            console.log('Error in PUT/ feedback', error);
+        })
+
+    }
+
     // functions to create the delete button popover effect
-    const handleClick = (event) => {
+    const handlePopover = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -60,12 +77,12 @@ export default function AdminPage() {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-        <TableContainer component={Paper}>
-            <Table stickyHeader sx={{ minWidth: 650 }} aria-label='simple table'>
+        <TableContainer component={Paper} sx={{ width: '80%', m: 'auto', minWidth: 650 }}>
+            <Table stickyHeader aria-label='simple table'>
                 <TableHead sx={{
                     '& th': {
                         color: '#fcf2e7',
-                        backgroundColor: '#870052'
+                        backgroundColor: '#17603d'
                     }
                 }}>
                     <TableRow >
@@ -73,6 +90,8 @@ export default function AdminPage() {
                         <TableCell>Comprehension</TableCell>
                         <TableCell>Support</TableCell>
                         <TableCell>Comments</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Flag</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
                 </TableHead>
@@ -80,7 +99,7 @@ export default function AdminPage() {
                     {feedback.map((entry, i) => (
                         <TableRow
                             key={i}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: entry.flagged === true && "#faff3f"}}
                         >
                             <TableCell
                                 component="th"
@@ -89,8 +108,14 @@ export default function AdminPage() {
                             <TableCell >{entry.understanding}</TableCell>
                             <TableCell >{entry.support}</TableCell>
                             <TableCell >{entry.comments}</TableCell>
+                            <TableCell >{entry.date}</TableCell>
                             <TableCell >
-                                <IconButton onClick={handleClick} aria-label="delete" color="error">
+                                <IconButton onClick={() => handleFlag(entry)} aria-label="delete" color="error">
+                                    <FlagIcon />
+                                </IconButton>
+                            </TableCell>
+                            <TableCell >
+                                <IconButton onClick={handlePopover} aria-label="delete" color="error">
                                     <DeleteIcon />
                                 </IconButton>
                                 <Popover
@@ -103,11 +128,11 @@ export default function AdminPage() {
                                         horizontal: 'left',
                                     }}
                                 >
-                                    <Typography sx={{margin: 5 }}>
+                                    <Typography sx={{ margin: 5 }}>
                                         Are you sure you want to delete this entry?
                                     </Typography>
-                                    <Stack sx={{margin: 5 }}
-                                    direction='row' spacing={8}>
+                                    <Stack sx={{ margin: 5 }}
+                                        direction='row' spacing={8}>
                                         <Button onClick={handleClose}
                                             aria-label="delete"
                                             color="secondary"
@@ -129,8 +154,8 @@ export default function AdminPage() {
                             </TableCell>
                         </TableRow>
                     ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+            </TableBody>
+        </Table>
+        </TableContainer >
     )
 }

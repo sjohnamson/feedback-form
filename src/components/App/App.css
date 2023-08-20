@@ -2,6 +2,7 @@
   margin: auto;
   margin-top: 10px;
   max-width: 70%;
+  min-width: 650px; 
   text-align: center;
   background-color: rgb(175, 215, 246);
   border-style: solid;

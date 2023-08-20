@@ -7,7 +7,7 @@ router
     .get('/', (req, res) => {
         // Find all feedback entries and return them
         pool
-            .query('SELECT * FROM "feedback";')
+            .query('SELECT * FROM "feedback" ORDER BY id DESC;')
             .then((result) => {
                 res.send(result.rows);
             }).catch((error) => {
@@ -38,6 +38,23 @@ router
             .catch(error => {
                 console.log('Error POST /feedback', error);
                 res.sendStatus(500);
+            })
+    });
+
+router
+    .put('/:id', (req, res) => {
+        console.log('req.params.id in put: ', req.params.id);
+        let entryId = req.params.id;
+        let flagged = req.body.flagged;
+        let sqlText = `UPDATE "feedback" SET flagged = $1 WHERE id=$2;`
+
+        pool.query(sqlText, [flagged, entryId])
+            .then((result) => {
+                res.sendStatus(200)
+            })
+            .catch((error) => {
+                console.log(`Error making database query ${sqlText}`, error);
+                res.sendStatus(500)
             })
     });
 
