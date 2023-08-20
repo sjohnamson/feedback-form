@@ -41,4 +41,20 @@ router
             })
     });
 
-    module.exports = router;
+router
+    .delete('/:id', (req, res) => {
+        console.log('req.params.id in delete: ', req.params.id);
+        let entryId = req.params.id;
+        let sqlText = `DELETE FROM feedback WHERE id=$1;`
+
+        pool.query(sqlText, [entryId])
+            .then((result) => {
+                res.sendStatus(200)
+            })
+            .catch((error) => {
+                console.log(`Error making database query ${sqlText}`, error);
+                res.sendStatus(500)
+            })
+    });
+
+module.exports = router;
