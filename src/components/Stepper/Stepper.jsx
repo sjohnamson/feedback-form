@@ -22,23 +22,27 @@ function HorizontalStepper() {
     const [completed, setCompleted] = useState({});
     const history = useHistory();
 
-
+    // function to get number of steps
     const totalSteps = () => {
         return steps.length;
     };
 
+    // function to keep track of how many steps have been completed
     const completedSteps = () => {
         return Object.keys(completed).length;
     };
 
+    // function to check if the active step is the last one
     const isLastStep = () => {
         return activeStep === totalSteps() - 1;
     };
 
+    // function to check if comloeted steps and total steps are equal
     const allStepsCompleted = () => {
         return completedSteps() === totalSteps();
     };
 
+    // function when next button is clicked
     const handleNext = () => {
         const newActiveStep =
             isLastStep() && !allStepsCompleted()
@@ -49,14 +53,17 @@ function HorizontalStepper() {
         setActiveStep(newActiveStep);
     };
 
+    // function when back button is clicked
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    // makes the step that was clicked on the active step
     const handleStep = (step) => () => {
         setActiveStep(step);
     };
 
+    // records the step as complete when someone submits an entry, also navigates to next step
     const handleComplete = () => {
         const newCompleted = completed;
         newCompleted[activeStep] = true;
@@ -64,11 +71,13 @@ function HorizontalStepper() {
         handleNext();
     };
 
+    // resets the completed and navigates to first step
     const handleReset = () => {
         setActiveStep(0);
         setCompleted({});
     };
 
+    // navigates to the review page when submit entries is clicked
     const handleReview = () => {
         history.push('/review');
     }

@@ -15,6 +15,7 @@ export default function FeedbackReview() {
 
     console.log('in review', feedback.feeling)
 
+    // POSTS the feedback object into the database
     const handleSubmit = () => {
         axios
             .post('/feedback', feedback)
@@ -34,19 +35,19 @@ export default function FeedbackReview() {
             <h3>Understanding: {feedback.understanding}</h3>
             <h3>Support: {feedback.support}</h3>
             <h3>Comment: {feedback.comments}</h3>
-            <Stack 
-            direction="row" 
-            justifyContent="center"
-            spacing={2}
+            <Stack
+                direction="row"
+                justifyContent="center"
+                spacing={2}
             >
                 <Link to='/'>
-                <Button
-                    variant="outlined"
-                    color='secondary'
-                    endIcon={<EditIcon />}
-                >
-                    Edit Responses
-                </Button>
+                    <Button
+                        variant="outlined"
+                        color='secondary'
+                        endIcon={<EditIcon />}
+                    >
+                        Edit Responses
+                    </Button>
                 </Link>
                 <Button
                     onClick={handleSubmit}

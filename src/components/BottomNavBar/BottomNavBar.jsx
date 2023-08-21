@@ -7,9 +7,11 @@ import PersonIcon from '@mui/icons-material/Person';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 function BottomNavBar() {
+    // sets value of the button that was clicked
     const [value, setValue] = useState(0);
     const history = useHistory()
 
+    // function to navigate on button click
     const bottomNavBar = (value) => {
         switch (value) {
             case 0:
@@ -23,7 +25,7 @@ function BottomNavBar() {
 
     return (
         <Paper
-            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, width: '70%', margin: 'auto'}}
+            sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, width: '70%', margin: 'auto' }}
             elevation={4}
         >
             <BottomNavigation
@@ -32,7 +34,7 @@ function BottomNavBar() {
                 onChange={(event, newValue) => {
                     setValue(newValue);
                 }}
-                sx={{ backgroundColor: '#033076'}}
+                sx={{ backgroundColor: '#033076' }}
             >
                 <BottomNavigationAction
                     onClick={() => bottomNavBar(0)}

@@ -11,10 +11,10 @@ export default function Comments({ handleComplete }) {
     const dispatch = useDispatch();
     const [newComment, setNewComment] = useState('');
 
+    // dispatch the feedback to the redux store
     const storeFeedback = () => {
         console.log('in storeFeedback, ', newComment)
         dispatch({ type: 'ADD_FEEDBACK', payload: { key: 'comments', value: newComment } })
-        // history.push('/understanding')
         handleComplete();
     }
 

@@ -17,12 +17,15 @@ import FlagIcon from '@mui/icons-material/Flag';
 
 
 export default function AdminPage() {
-
+    // all the feedback
     const [feedback, setFeedback] = useState([])
+    // state for the popover anchor
     const [anchorEl, setAnchorEl] = useState(null);
 
+    // renders the entries on load 
     useEffect(() => { fetchEntries() }, [])
 
+    // GET entries for the table
     const fetchEntries = () => {
         axios
             .get('/feedback')
@@ -35,6 +38,7 @@ export default function AdminPage() {
             })
     }
 
+    // DELETE entries from the table
     const deleteEntry = (entry) => {
         console.log('Image to delete: ', entry)
         axios
@@ -53,14 +57,14 @@ export default function AdminPage() {
     const handleFlag = (entry) => {
         console.log('flagged?', entry.flagged)
         axios
-        .put(`/feedback/${entry.id}`, {flagged: !entry.flagged})
-        .then((response) => {
-            console.log('Flagged: ', entry.id);
-            fetchEntries();
-        })
-        .catch((error) => {
-            console.log('Error in PUT/ feedback', error);
-        })
+            .put(`/feedback/${entry.id}`, { flagged: !entry.flagged })
+            .then((response) => {
+                console.log('Flagged: ', entry.id);
+                fetchEntries();
+            })
+            .catch((error) => {
+                console.log('Error in PUT/ feedback', error);
+            })
 
     }
 
@@ -72,7 +76,7 @@ export default function AdminPage() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
+    //  variables for the popover
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
@@ -99,7 +103,7 @@ export default function AdminPage() {
                     {feedback.map((entry, i) => (
                         <TableRow
                             key={i}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: entry.flagged === true && "#faff3f"}}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, backgroundColor: entry.flagged === true && "#faff3f" }}
                         >
                             <TableCell
                                 component="th"
@@ -109,6 +113,7 @@ export default function AdminPage() {
                             <TableCell >{entry.support}</TableCell>
                             <TableCell >{entry.comments}</TableCell>
                             <TableCell >{entry.date}</TableCell>
+                            {/* buttons to flag and delete */}
                             <TableCell >
                                 <IconButton onClick={() => handleFlag(entry)} aria-label="delete" color="error">
                                     <FlagIcon />
@@ -118,6 +123,8 @@ export default function AdminPage() {
                                 <IconButton onClick={handlePopover} aria-label="delete" color="error">
                                     <DeleteIcon />
                                 </IconButton>
+
+                                {/* popover info */}
                                 <Popover
                                     id={id}
                                     open={open}
@@ -151,11 +158,12 @@ export default function AdminPage() {
                                         </Button>
                                     </Stack>
                                 </Popover>
+
                             </TableCell>
                         </TableRow>
                     ))}
-            </TableBody>
-        </Table>
+                </TableBody>
+            </Table>
         </TableContainer >
     )
 }
