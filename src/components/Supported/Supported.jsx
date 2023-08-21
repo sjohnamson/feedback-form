@@ -12,6 +12,7 @@ export default function Supported({ handleComplete }) {
     const [newSupport, setNewSupport] = useState('');
     const [newError, setNewError] = useState(false)
 
+    // dispatch the feedback to the redux store
     const storeFeedback = () => {
         console.log('in storeFeedback, ', Number(newSupport))
         if (Number(newSupport) >= 1 && Number(newSupport) <= 5) {

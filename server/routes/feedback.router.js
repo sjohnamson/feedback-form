@@ -21,12 +21,14 @@ router
     .post('/', (req, res) => {
         console.log('in router post')
 
+        // destructure req.body into the keys we need
         const {
             feeling,
             understanding,
             support,
             comments,
         } = req.body;
+
         const sqlText = `INSERT INTO feedback ("feeling", "understanding", "support", "comments")
                         VALUES ($1, $2, $3, $4);`
 
@@ -41,6 +43,7 @@ router
             })
     });
 
+    // UPDATE flagged attribute with a PUT route
 router
     .put('/:id', (req, res) => {
         console.log('req.params.id in put: ', req.params.id);
@@ -58,6 +61,7 @@ router
             })
     });
 
+    // DELETE feedback entry from the admin page
 router
     .delete('/:id', (req, res) => {
         console.log('req.params.id in delete: ', req.params.id);

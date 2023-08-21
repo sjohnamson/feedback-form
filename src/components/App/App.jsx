@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
 import './App.css';
 import { HashRouter as Router, Route, Link } from 'react-router-dom'
 import Header from '../Header/Header';

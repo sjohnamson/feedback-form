@@ -13,6 +13,7 @@ export default function FeelingToday({ handleComplete }) {
     const [newFeelings, setNewFeelings] = useState('');
     const [newError, setNewError] = useState(false);
 
+    // dispatch the feedback to the redux store
     const storeFeedback = () => {
         console.log('in storeFeedback, ', Number(newFeelings))
         if (Number(newFeelings) >= 1 && Number(newFeelings) <= 5) {

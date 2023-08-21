@@ -12,6 +12,7 @@ export default function UnderstandingContent({ handleComplete }) {
     const [newUnderstanding, setNewUnderstanding] = useState('');
     const [newError, setNewError] = useState(false)
 
+    // dispatch the feedback to the redux store
     const storeFeedback = () => {
         console.log('in storeFeedback, ', Number(newUnderstanding))
         if (Number(newUnderstanding) >= 1 && Number(newUnderstanding) <= 5) {
