@@ -1,15 +1,37 @@
 import React from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 import './App.css';
+import { HashRouter as Router, Route, Link } from 'react-router-dom'
+import Header from '../Header/Header';
+import FeedbackReview from '../FeedbackReview/FeedbackReview';
+import ThankYou from '../ThankYou/ThankYou';
+import AdminPage from '../AdminPage/AdminPage';
+import HorizontalStepper from '../Stepper/Stepper';
+import BottomNavBar from '../BottomNavBar/BottomNavBar';
 
 function App() {
 
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1 className='App-title'>Feedback!</h1>
-        <h4>Don't forget it!</h4>
-      </header>
+      <Header />
+
+      <Router>
+        <Route path='/' exact>
+          <HorizontalStepper />
+        </Route>
+        <Route path='/review' exact>
+          <FeedbackReview />
+        </Route>
+        <Route path='/thankyou' exact>
+          <ThankYou />
+        </Route>
+        <Route path='/admin' exact>
+          <AdminPage />
+        </Route>
+        <BottomNavBar />
+      </Router>
+
     </div>
   );
 }
