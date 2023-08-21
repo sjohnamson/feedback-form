@@ -13,6 +13,7 @@ import Supported from '../Supported/Supported';
 import Comments from '../Comments/Comments';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import { Stack } from '@mui/material';
 
 
 function HorizontalStepper() {
@@ -99,9 +100,10 @@ function HorizontalStepper() {
                         <Typography sx={{ mt: 2, mb: 1 }}>
                             All steps completed - you&apos;re finished
                         </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, p: 2}}>
                             <Box sx={{ flex: '1 1 auto' }} />
-                            <Button
+                            <Stack direction='row' spacing={2}> 
+                                <Button
                                 onClick={handleBack}
                                 variant='outlined'
                                 startIcon={<EditIcon />}
@@ -117,6 +119,7 @@ function HorizontalStepper() {
                                     Submit Feedback
                                 </Button>
                             }
+                            </Stack>
                         </Box>
                     </>
                 ) : (

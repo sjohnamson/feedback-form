@@ -1,6 +1,4 @@
 import { useDispatch, useSelector, } from 'react-redux';
-import axios from 'axios';
-import { useState } from 'react';
 import Button from '@mui/material/Button';
 
 import { useHistory } from 'react-router-dom'

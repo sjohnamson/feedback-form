@@ -1,12 +1,4 @@
-import { useDispatch, useSelector, } from 'react-redux';
-import axios from 'axios';
-import { useState } from 'react';
-
-import { useHistory } from 'react-router-dom'
-
 export default function Header() {
-    const history = useHistory();
-    const dispatch = useDispatch();
 
     return (
     <header className='App-header'>
@@ -14,4 +6,4 @@ export default function Header() {
         <h4>Don't forget it!</h4>
     </header>
     )
-};
+}

@@ -1,16 +1,14 @@
-import { useDispatch, useSelector, } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Button from '@mui/material/Button';
-import { useHistory } from 'react-router-dom'
 import { Typography } from '@mui/material';
 
 export default function FeelingToday({ handleComplete }) {
     
-    const history = useHistory();
     const dispatch = useDispatch();
     const [newFeelings, setNewFeelings] = useState('');
     const [newError, setNewError] = useState(false);
